@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\PurchaseOrdersController;
+use App\Http\Controllers\SuppliersController;
+use App\Http\Controllers\UnitsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +19,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('admin');
+})->name('admin');
+
+
+
+Route::resource('/categories', CategoriesController::class);
+Route::resource('/units', UnitsController::class);
+Route::resource('/suppliers', SuppliersController::class);
+Route::resource('/products', ProductsController::class);
+Route::resource('/orders', PurchaseOrdersController::class);
+Route::get('/get-products/{categoryId}', [PurchaseOrdersController::class, 'getProducts']);
+
